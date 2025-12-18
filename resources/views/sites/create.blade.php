@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Ajouter un agent')
+@section('title', 'Ajouter un site')
 
 @section('content')
 
