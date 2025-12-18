@@ -31,7 +31,7 @@
             <span>Plannings</span>
         </a>
         
-        <a href="#" class="nav-item">
+        <a href="/sites" class="nav-item">
             <i class="fas fa-building"></i>
             <span>Sites</span>
         </a>

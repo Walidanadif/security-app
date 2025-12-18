@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\SiteController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -27,6 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/agents/{id}/edit', [AgentController::class, 'edit']);
     Route::put('/agents/{id}', [AgentController::class, 'update']);
     Route::delete('/agents/{id}', [AgentController::class, 'destroy']);
+    Route::get('/sites', [SiteController::class, 'index']);
+    Route::get('/sites/create', [SiteController::class, 'create']);
+    Route::post('/sites', [SiteController::class, 'store']);
+    Route::get('/sites/{id}/edit', [SiteController::class, 'edit']);
+    Route::put('/sites/{id}', [SiteController::class, 'update']);
+    Route::delete('/sites/{id}', [SiteController::class, 'destroy']);
 
 });
 
