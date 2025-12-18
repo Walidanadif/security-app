@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class AgentController extends Controller
 {
     public function index()
@@ -22,15 +23,24 @@ public function store(Request $request)
 {
     $request->validate([
         'nom' => 'required',
+        'email' =>'required',
+        'password'=>'required',
         'telephone' => 'required',
         'adresse' => 'required',
     ]);
 
+    User::create([
+        'name'=>$request->nom,
+        'email'=>$request->email,
+        'password'=>Hash::make($request->password),
+        'role'=>'agent',
+    ]);
+    $user = User::where('email',$request->email)->first();
     Agent::create([
         'nom' => $request->nom,
         'telephone' => $request->telephone,
         'adresse' => $request->adresse,
-        'user_id' => auth()->id(),
+        'user_id' => $user->id,
     ]);
 
     return redirect('/agents');
