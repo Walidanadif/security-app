@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PlanningController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+
+    
+
     // Profil
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
@@ -46,6 +51,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Gestion des sites
     Route::resource('sites', SiteController::class);
+
+    //gestion de planning
+    Route::resource('plannings',PlanningController::class);
 });
 
 require __DIR__.'/auth.php';

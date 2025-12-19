@@ -7,7 +7,6 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <!-- Card principale -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">
@@ -22,7 +21,6 @@
                         @method('PUT')
 
                         <div class="row g-3">
-                            <!-- Nom -->
                             <div class="col-md-12">
                                 <label for="nom" class="form-label fw-semibold">
                                     <i class="bi bi-person me-1"></i>
@@ -39,7 +37,6 @@
                             </div>
 
 
-                            <!-- Adresse -->
                             <div class="col-md-6">
                                 <label for="adresse" class="form-label fw-semibold">
                                     <i class="bi bi-geo-alt me-1"></i>
@@ -56,7 +53,6 @@
                             </div>
                         </div>
 
-                        <!-- Boutons -->
                         <div class="d-flex gap-2 justify-content-end mt-4 pt-3 border-top">
                             <a href="/sites" class="btn btn-secondary">
                                 <i class="bi bi-x-circle me-1"></i>

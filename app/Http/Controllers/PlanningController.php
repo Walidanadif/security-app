@@ -15,7 +15,10 @@ class PlanningController extends Controller
 
     public function create()
     {
-        return view('plannings.create');
+        $agents = Agent::select('id', 'nom')->get();
+        $sites  = Site::select('id', 'nom')->get();
+
+        return view('plannings.create',compact('agents','sites'));
     }
 
     public function store(Request $request)
@@ -42,11 +45,12 @@ class PlanningController extends Controller
     public function edit($id)
     {
         $planning = Planning::findOrFail($id);
-        return view('plannings.edit', compact('planning'));
+        $agents = Agent::select('id', 'nom')->get();
+        $sites  = Site::select('id', 'nom')->get();
+        return view('plannings.edit', compact('planning','agents','sites'));
     }
     public function update(Request $request, $id)
     {
-        try{
         $request->validate([
             'agent_id' => 'required|exists:agents,id',
             'site_id' => 'required|exists:sites,id',
@@ -58,10 +62,7 @@ class PlanningController extends Controller
         $planning = Planning::findOrFail($id);
         $planning->update($request->all());
 
-        return redirect('/plannings')->with('success', 'Planning mis à jour avec succès');
-    } catch (\Exception $e) {
-      return redirect()->back()->withErrors(['error' => 'Une erreur est survenue lors de la mise à jour du planning.']);
-
-    }      
+        return redirect('/plannings');
+     
     }
 }

@@ -7,11 +7,10 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <!-- Card principale -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">
-                        <i class="bi bi-person-plus-fill me-2"></i>
+                        <i class="bi bi-building text-white me-2"></i>
                         Ajouter un nouvel site
                     </h4>
                 </div>

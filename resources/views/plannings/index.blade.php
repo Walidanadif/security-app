@@ -10,7 +10,8 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="h2 mb-1 fw-bold text-dark">
-                        <i class="fas fa-users text-primary me-2"></i>
+                        <i class="bi bi-calendar-plus text-primary me-2"></i>
+
                         Gestion des plannings
                     </h1>
                   
@@ -72,12 +73,14 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <span class="text-muted">
-                                                {{ $planning->site->adresse }}
+                                        {{ $planning->site->nom }}
+
                                             </span>
                                         </td>
                                         <td class="px-4 py-3 text-center">
                                             <span class="text-muted">
-                                                {{ $planning->site->nom }}
+                                       {{ $planning->site->adresse }}
+
                                             </span>
                                         </td>
                                         <td class="px-4 py-3 text-center">
@@ -138,10 +141,6 @@
     </div>
 </div>
 
-<!-- Optional: Add custom styles -->
-<style>
-   
-</style>
 
 
 
