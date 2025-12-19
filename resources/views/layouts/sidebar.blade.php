@@ -47,19 +47,28 @@
                 <i class="fas fa-calendar-alt"></i>
                 <span>Plannings</span>
             </a>
-
+        <a href="#" class="nav-item">
+            <i class="fas fa-clock"></i>
+            <span>Liste de presence</span>
+        </a>
         @endif
         {{-- ==================================================== --}}
 
         <!-- Pointages (plus tard) -->
         
        
-        
+        @if($user->role === 'agent')
+
         <a href="#" class="nav-item">
             <i class="fas fa-clock"></i>
             <span>Pointages</span>
         </a>
 
+        <a href="#" class="nav-item">
+            <i class="fas fa-clock"></i>
+            <span>Planning</span>
+        </a>
+        @endif
         <div class="nav-divider"></div>
 
         <!-- Profil (TOUS) -->
