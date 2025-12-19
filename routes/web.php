@@ -7,6 +7,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanningController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Page d'accueil
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
+
+
+    
 
     // Profil
     Route::get('/profile', [ProfileController::class, 'edit'])

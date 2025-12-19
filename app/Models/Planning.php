@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+  
 use Illuminate\Database\Eloquent\Model;
 
  class Planning extends Model
@@ -21,5 +22,3 @@ use Illuminate\Database\Eloquent\Model;
         return $this->belongsTo(Site::class);
     }
 }
-
-
