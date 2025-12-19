@@ -1,29 +1,71 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+@section('content')
+<div class="max-w-3xl mx-auto mt-10">
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-blue-600 px-6 py-4 text-white flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-white text-blue-600 flex items-center justify-center text-xl font-bold">
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
             </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+            <div>
+                <h2 class="text-lg font-semibold">{{ auth()->user()->name }}</h2>
+                <p class="text-sm opacity-90">{{ auth()->user()->role }}</p>
             </div>
         </div>
+
+        <!-- Content -->
+        <div class="p-6">
+
+            @if (session('success'))
+                <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('profile.update') }}" class="space-y-4">
+                @csrf
+                @method('PATCH')
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nom complet</label>
+                    <input type="text" name="name" value="{{ auth()->user()->name }}"
+                           class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">Email</label>
+                    <input type="email" name="email" value="{{ auth()->user()->email }}"
+                           class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nouveau mot de passe</label>
+                    <input type="password" name="password"
+                           placeholder="Laisser vide pour ne pas changer"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">Confirmer mot de passe</label>
+                    <input type="password" name="password_confirmation"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="reset"
+                        class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">
+                        Annuler
+                    </button>
+
+                    <button type="submit"
+                        class="px-5 py-2 rounded bg-green-600 text-white hover:bg-green-700">
+                        💾 Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</x-app-layout>
+</div>
+@endsection
