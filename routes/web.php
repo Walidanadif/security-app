@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/plannings', [PlanningController::class, 'store']);
     Route::get('/plannings/{id}/edit', [PlanningController::class, 'edit']);
     Route::put('/plannings/{id}', [PlanningController::class, 'update']);
+    Route::delete('/plannings/{id}', [PlanningController::class, 'destroy']);
 
 });
 

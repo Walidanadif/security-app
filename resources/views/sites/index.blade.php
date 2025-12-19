@@ -10,8 +10,9 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="h2 mb-1 fw-bold text-dark">
-                        <i class="fas fa-users text-primary me-2"></i>
-                        Gestion des sites
+                <i class="bi bi-building text-primary me-2"></i>
+
+                            Gestion des sites
                     </h1>
                   
                 </div>
