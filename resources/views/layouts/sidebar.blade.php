@@ -26,7 +26,7 @@
             <span>Agents</span>
         </a>
         
-        <a href="#" class="nav-item">
+        <a href="/plannings" class="nav-item">
             <i class="fas fa-calendar-alt"></i>
             <span>Plannings</span>
         </a>

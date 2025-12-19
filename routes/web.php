@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\PlanningController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/sites/{id}/edit', [SiteController::class, 'edit']);
     Route::put('/sites/{id}', [SiteController::class, 'update']);
     Route::delete('/sites/{id}', [SiteController::class, 'destroy']);
+    Route::get('/plannings', [PlanningController::class, 'index']);
+    Route::get('/plannings/create', [PlanningController::class, 'create']);
+    Route::post('/plannings', [PlanningController::class, 'store']);
+    Route::get('/plannings/{id}/edit', [PlanningController::class, 'edit']);
+    Route::put('/plannings/{id}', [PlanningController::class, 'update']);
 
 });
 

@@ -44,7 +44,7 @@ class SiteController extends controller
         $site = Site::findOrFail($id);
         return view('sites.edit', compact('site'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -57,6 +57,6 @@ class SiteController extends controller
         $site->adresse = $request->adresse;
         $site->save();
 
-        return redirect('/sites');
+        return redirect('/sites')->with('success', 'Site mis à jour avec succès');
     }
 }
