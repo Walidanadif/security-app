@@ -21,11 +21,19 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    // Profil
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
 });
+
 /*
 |--------------------------------------------------------------------------
 | Routes ADMIN UNIQUEMENT
@@ -33,10 +41,11 @@ Route::middleware('auth')->group(function () {
 */
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    // Agents
+    // Gestion des agents
     Route::resource('agents', AgentController::class);
 
-    // Sites
+    // Gestion des sites
     Route::resource('sites', SiteController::class);
 });
+
 require __DIR__.'/auth.php';

@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
         'nom',
         'adresse'
     ];
+    public function plannings()
+    {
+        return $this->hasMany(Planning::class);
+    }
 }
 
 
