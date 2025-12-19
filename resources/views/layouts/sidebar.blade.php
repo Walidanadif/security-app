@@ -42,7 +42,7 @@
                 <span>Sites</span>
             </a>
 
-            <a href="#"
+            <a href="{{ route('plannings.index') }}"
                class="nav-item">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Plannings</span>
@@ -53,20 +53,7 @@
 
         <!-- Pointages (plus tard) -->
         
-        <a href="/agents" class="nav-item">
-            <i class="fas fa-users"></i>
-            <span>Agents</span>
-        </a>
-        
-        <a href="/plannings" class="nav-item">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Plannings</span>
-        </a>
-        
-        <a href="/sites" class="nav-item">
-            <i class="fas fa-building"></i>
-            <span>Sites</span>
-        </a>
+       
         
         <a href="#" class="nav-item">
             <i class="fas fa-clock"></i>
