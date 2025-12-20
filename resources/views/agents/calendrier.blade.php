@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
             initialView: 'timeGridWeek',
             locale: 'fr',
             events: "{{ route('agent.calendrier.events') }}",
+            eventTimeFormat: {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        },
 
             eventContent: function(arg) {
               return {
