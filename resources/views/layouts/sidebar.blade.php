@@ -64,7 +64,7 @@
             <span>Pointages</span>
         </a>
 
-        <a href="/agent/calendrier" class="nav-item">
+        <a href="{{ route('agent.calendrier') }}" class="nav-item {{ request()->routeIs('agent.calendrier') ? 'active' : '' }}">
         <i class="fas fa-calendar-alt"></i>
             <span>Planning</span>
         </a>
