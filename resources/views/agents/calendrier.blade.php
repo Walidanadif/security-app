@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid p-4">
-    <h4>Mon planning</h4>
+    <h4>Mon planning de sécurité</h4>
     <div id="calendar" style="min-height:650px;"></div>
 </div>
 @endsection

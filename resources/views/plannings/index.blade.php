@@ -44,19 +44,19 @@
                                             <i class="fas fa-phone me-2"></i>Nom Agent
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted" style="font-size: 0.75rem;">
-                                            <i class="fas fa-map-marker-alt me-2"></i>Nom site
+                                        <i class="bi bi-building "></i>Nom site
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
-                                            <i class="fas fa-cog me-2"></i>Adresse site
+                                            <i class="fas fa-map-marker-alt me-2"></i>Adresse site
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
-                                            <i class="fas fa-cog me-2"></i>Date
+                                            <i class="fas fa-calendar-day me-2"></i>Date
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
-                                            <i class="fas fa-cog me-2"></i>Heure debut
+                                            <i class="fas fa-hourglass-start me-2"></i>Heure debut
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
-                                            <i class="fas fa-cog me-2"></i>Heure fin
+                                            <i class="fas fa-hourglass-end me-2"></i>Heure fin
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
                                             <i class="fas fa-cog me-2"></i>Actions
@@ -87,22 +87,19 @@
                                             </span>
                                         </td>
                                         <td class="px-4 py-3 text-center">
-                                            <span class="text-muted
-">
+                                            <span class="text-muted">
                                                 {{ $planning->date }}
 
                                             </span>
                                         </td>
                                         <td class="px-4 py-3 text-center">
-                                            <span class="text-muted
-">
+                                            <span class="text-muted">
                                                 {{ $planning->heure_debut }}
 
                                             </span>
                                         </td>
                                         <td class="px-4 py-3 text-center">
-                                            <span class="text-muted
-">
+                                            <span class="text-muted">
                                                 {{ $planning->heure_fin }}
                                             </span>
                                         </td>
@@ -151,6 +148,9 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center mt-4">
+    {{ $plannings->links() }}
+</div>
 
 
 

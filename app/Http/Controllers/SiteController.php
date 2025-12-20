@@ -9,7 +9,7 @@ class SiteController extends controller
 
     public function index()
     {
-        $sites = Site::all();
+        $sites = Site::paginate(5);
         return view('sites.index', compact('sites'));
     }
 

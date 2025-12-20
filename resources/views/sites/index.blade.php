@@ -92,7 +92,10 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                           
+                       
                         </div>
+                         
                     @else
                         <div class="text-center py-5">
                             <div class="mb-3">
@@ -111,11 +114,9 @@
         </div>
     </div>
 </div>
-
-<!-- Optional: Add custom styles -->
-<style>
-   
-</style>
+                        <div class="d-flex justify-content-center mt-">
+                                 {{ $sites->links() }}
+                        </div>
 
 
 

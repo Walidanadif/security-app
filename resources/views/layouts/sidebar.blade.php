@@ -43,12 +43,12 @@
             </a>
 
             <a href="{{ route('plannings.index') }}"
-               class="nav-item">
+               class="nav-item {{ request()->routeIs('plannings.*') ? 'active' : '' }}">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Plannings</span>
             </a>
         <a href="#" class="nav-item">
-            <i class="fas fa-clock"></i>
+<i class="fas fa-stopwatch"></i>
             <span>Liste de presence</span>
         </a>
         @endif
@@ -60,12 +60,12 @@
         @if($user->role === 'agent')
 
         <a href="#" class="nav-item">
-            <i class="fas fa-clock"></i>
+    <i class="fas fa-user-clock"></i>
             <span>Pointages</span>
         </a>
 
         <a href="/agent/calendrier" class="nav-item">
-            <i class="fas fa-clock"></i>
+        <i class="fas fa-calendar-alt"></i>
             <span>Planning</span>
         </a>
         @endif

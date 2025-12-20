@@ -10,7 +10,8 @@ class AgentController extends Controller
 {
     public function index()
     {
-         $agents = Agent::with('user')->get();
+         $agents = Agent::with('user')
+         ->paginate(5);
     return view('agents.index', compact('agents'));
     }
 
@@ -45,13 +46,19 @@ public function store(Request $request)
 
     return redirect('/agents');
 }
-    public function destroy($id)
+   public function destroy($id)
 {
     $agent = Agent::findOrFail($id);
+
+    $userId = $agent->user_id;
+
     $agent->delete();
 
-    return redirect('/agents');
+    User::where('id', $userId)->delete();
+
+    return redirect('/agents')->with('success', 'Agent supprimé avec succès');
 }
+
 public function edit($id)
 {
     $agent = Agent::findOrFail($id);

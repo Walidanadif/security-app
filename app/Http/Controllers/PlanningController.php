@@ -9,7 +9,8 @@ class PlanningController extends Controller
 {
     public function index()
     {
-        $plannings = Planning::with(['agent', 'site'])->get();
+        $plannings = Planning::with(['agent', 'site'])
+        ->paginate(5);
         return view('plannings.index', compact('plannings'));
     }
 
