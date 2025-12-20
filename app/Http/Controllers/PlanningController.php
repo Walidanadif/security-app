@@ -65,4 +65,39 @@ class PlanningController extends Controller
         return redirect('/plannings');
      
     }
+
+     public function index2()
+    {
+        return view('agents.calendrier');
+    }
+
+public function events()
+{
+    $agent = auth()->user()->agent;
+
+    if (!$agent) {
+        return response()->json([]);
+    }
+
+    $plannings = Planning::with('site')
+        ->where('agent_id', $agent->id)
+        ->get();
+
+    $events = $plannings->map(function ($p) {
+    return [
+        'title' => $p->site->nom,
+        'start' => $p->date . 'T' . $p->heure_debut,
+        'end'   => $p->date . 'T' . $p->heure_fin,
+        'extendedProps' => [
+            'adresse' => $p->site->adresse,
+        ],
+    ];
+});
+
+
+    return response()->json($events);
+}
+
+
+
 }

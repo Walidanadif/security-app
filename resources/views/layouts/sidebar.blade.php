@@ -64,7 +64,7 @@
             <span>Pointages</span>
         </a>
 
-        <a href="#" class="nav-item">
+        <a href="/agent/calendrier" class="nav-item">
             <i class="fas fa-clock"></i>
             <span>Planning</span>
         </a>

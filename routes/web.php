@@ -28,7 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    Route::get('/agent/calendrier', [PlanningController::class, 'index2'])
+     ->name('agent.calendrier');
 
+    Route::get('/agent/calendrier/events', [PlanningController::class, 'events'])
+     ->name('agent.calendrier.events');
     
 
     // Profil
