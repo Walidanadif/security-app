@@ -50,6 +50,9 @@
                                             <i class="fas fa-cog me-2"></i>Adresse site
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
+                                            <i class="fas fa-cog me-2"></i>Date
+                                        </th>
+                                        <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
                                             <i class="fas fa-cog me-2"></i>Heure debut
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted text-center" style="font-size: 0.75rem;">
@@ -80,6 +83,13 @@
                                         <td class="px-4 py-3 text-center">
                                             <span class="text-muted">
                                        {{ $planning->site->adresse }}
+
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center">
+                                            <span class="text-muted
+">
+                                                {{ $planning->date }}
 
                                             </span>
                                         </td>

@@ -379,3 +379,7 @@ body {
     .avatar-circle {
         font-size: 1rem;
     }
+
+    #calendar {
+    min-height: 650px;
+}
