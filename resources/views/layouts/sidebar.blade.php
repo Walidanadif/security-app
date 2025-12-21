@@ -59,7 +59,7 @@
        
         @if($user->role === 'agent')
 
-        <a href="#" class="nav-item">
+        <a href="{{ route('agent.pointage') }}" class="nav-item {{ request()->routeIs('agent.pointage') ? 'active' : '' }}">
     <i class="fas fa-user-clock"></i>
             <span>Pointages</span>
         </a>

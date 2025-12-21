@@ -6,6 +6,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanningController;
+use App\Http\Controllers\PresenceController;
 
 
 /*
@@ -34,7 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/agent/calendrier/events', [PlanningController::class, 'events'])
      ->name('agent.calendrier.events');
     
+    Route::get('/agent/pointage', [PresenceController::class, 'indexAgent'])
+        ->name('agent.pointage');
 
+    Route::post('/agent/pointage', [PresenceController::class, 'store'])
+        ->name('agent.pointage.store');
     // Profil
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
