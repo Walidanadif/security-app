@@ -10,6 +10,7 @@ class PlanningController extends Controller
     public function index()
     {
         $plannings = Planning::with(['agent', 'site'])
+        ->orderBy('date', 'desc')
         ->paginate(5);
         return view('plannings.index', compact('plannings'));
     }
