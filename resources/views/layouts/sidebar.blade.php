@@ -47,8 +47,8 @@
                 <i class="fas fa-calendar-alt"></i>
                 <span>Plannings</span>
             </a>
-        <a href="#" class="nav-item">
-<i class="fas fa-stopwatch"></i>
+        <a href="{{ route('admin.presence') }}" class="nav-item {{ request()->routeIs('admin.presence') ? 'active' : '' }}">
+        <i class="fas fa-stopwatch"></i>
             <span>Liste de presence</span>
         </a>
         @endif

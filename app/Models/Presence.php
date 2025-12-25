@@ -13,7 +13,7 @@ class Presence extends Model
     ];
 
    
-    public function agents()
+    public function agent()
     {
         return $this->belongsTo(Agent::class);
     }

@@ -63,6 +63,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     //gestion de planning
     Route::resource('plannings',PlanningController::class);
+    
+    Route::get('/admin/presence', [PresenceController::class, 'adminIndex'])
+        ->name('admin.presence');
 });
 
 require __DIR__.'/auth.php';
