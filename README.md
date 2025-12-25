@@ -43,3 +43,6 @@ php artisan migrate          # Créer les tables
 php artisan migrate:fresh    # Réinitialiser la base
 php artisan tinker           # Tester les modèles
 php artisan optimize:clear   # Nettoyer le cache
+
+7
+pour tester les absences: php artisan schedule:work     

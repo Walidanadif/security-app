@@ -30,7 +30,7 @@ public function handle()
 {
     $now = Carbon::now('Africa/Casablanca');
 
-    $plannings = Planning::all();
+    $plannings = Planning::whereDate('date', '<=', $now->toDateString())->get();
 
     foreach ($plannings as $planning) {
 
@@ -41,20 +41,24 @@ public function handle()
             $end->addDay();
         }
 
-        $limit = $start->copy()->addMinutes(15);
+        if ($now->greaterThan($end)) {
 
-        if ($now->between($limit, $end)) {
+            $absenceDate = $end->toDateString(); 
 
-            $exists = Presence::where('agent_id', $planning->agent_id)
-                ->whereDate('date', $start->toDateString())
-                ->exists();
+            $presence = Presence::where('agent_id', $planning->agent_id)
+                ->whereDate('date', $absenceDate)
+                ->first();
 
-            if (!$exists) {
-                Presence::create([
-                    'agent_id' => $planning->agent_id,
-                    'date'     => $start->toDateString(),
-                    'statut'   => 'absence',
-                ]);
+            if (!$presence || $presence->statut !== 'present') {
+                Presence::updateOrCreate(
+                    [
+                        'agent_id' => $planning->agent_id,
+                        'date'     => $absenceDate,
+                    ],
+                    [
+                        'statut' => 'absent',
+                    ]
+                );
             }
         }
     }
