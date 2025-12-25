@@ -41,7 +41,7 @@
                                     <tr>
                                         
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted" style="font-size: 0.75rem;">
-                                            <i class="fas fa-phone me-2"></i>Nom du site
+                                           <i class="bi bi-building me-2"></i>Nom du site
                                         </th>
                                         <th class="px-4 py-3 fw-semibold text-uppercase text-muted" style="font-size: 0.75rem;">
                                             <i class="fas fa-map-marker-alt me-2"></i>Adresse

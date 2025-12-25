@@ -140,13 +140,14 @@ public function store(Request $request)
 //admin
 
 public function adminIndex()
-    {
-        $presences = Presence::with('agent.user')
-            ->orderBy('date', 'desc')
-            ->paginate(5);
+{
+    $presences = Presence::with('agent.plannings.site')
+        ->orderBy('date', 'desc')
+        ->paginate(5);
 
-        return view('admin.presences.index', compact('presences'));
-    }
+    return view('agents.presence.admin.index', compact('presences'));
+}
+
 
     public function update(Request $request, $id)
     {
