@@ -68,4 +68,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('admin.presence');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/historique', [DashboardController::class, 'historiqueAgent'])
+        ->name('agent.historique');
+});
+
 require __DIR__.'/auth.php';

@@ -29,4 +29,17 @@ class DashboardController extends Controller
 
         return view('dashboard.agent');
     }
+
+    public function historiqueAgent()
+{
+    $user = auth()->user();
+
+    $presences = Presence::whereHas('agent', function ($q) use ($user) {
+        $q->where('user_id', $user->id);
+    })
+    ->orderBy('date', 'desc')
+    ->paginate(10);
+
+    return view('dashboard.historique-agent', compact('presences'));
+}
 }

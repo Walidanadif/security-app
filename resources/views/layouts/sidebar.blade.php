@@ -20,14 +20,14 @@
     <!-- NAV -->
     <nav class="sidebar-nav">
 
-        <!-- Dashboard (TOUS) -->
+        <!-- DASHBOARD (TOUS) -->
         <a href="{{ route('dashboard') }}"
            class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <i class="fas fa-chart-line"></i>
             <span>Tableau de bord</span>
         </a>
 
-        {{-- ================= ADMIN UNIQUEMENT ================= --}}
+        {{-- ================= ADMIN ================= --}}
         @if($user->role === 'admin')
 
             <a href="{{ route('agents.index') }}"
@@ -47,31 +47,43 @@
                 <i class="fas fa-calendar-alt"></i>
                 <span>Plannings</span>
             </a>
-        <a href="{{ route('admin.presence') }}" class="nav-item {{ request()->routeIs('admin.presence') ? 'active' : '' }}">
-        <i class="fas fa-stopwatch"></i>
-            <span>Liste de presence</span>
-        </a>
-        @endif
-        {{-- ==================================================== --}}
 
-        <!-- Pointages (plus tard) -->
-        
-       
+            <a href="{{ route('admin.presence') }}"
+               class="nav-item {{ request()->routeIs('admin.presence') ? 'active' : '' }}">
+                <i class="fas fa-stopwatch"></i>
+                <span>Liste de présence</span>
+            </a>
+
+        @endif
+        {{-- ========================================= --}}
+
+        {{-- ================= AGENT ================= --}}
         @if($user->role === 'agent')
 
-        <a href="{{ route('agent.pointage') }}" class="nav-item {{ request()->routeIs('agent.pointage') ? 'active' : '' }}">
-    <i class="fas fa-user-clock"></i>
-            <span>Pointages</span>
-        </a>
+            <a href="{{ route('agent.pointage') }}"
+               class="nav-item {{ request()->routeIs('agent.pointage') ? 'active' : '' }}">
+                <i class="fas fa-user-clock"></i>
+                <span>Pointage</span>
+            </a>
 
-        <a href="{{ route('agent.calendrier') }}" class="nav-item {{ request()->routeIs('agent.calendrier') ? 'active' : '' }}">
-        <i class="fas fa-calendar-alt"></i>
-            <span>Planning</span>
-        </a>
+            <a href="{{ route('agent.historique') }}"
+               class="nav-item {{ request()->routeIs('agent.historique') ? 'active' : '' }}">
+                <i class="fas fa-history"></i>
+                <span>Mon historique</span>
+            </a>
+
+            <a href="{{ route('agent.calendrier') }}"
+               class="nav-item {{ request()->routeIs('agent.calendrier') ? 'active' : '' }}">
+                <i class="fas fa-calendar-check"></i>
+                <span>Mon planning</span>
+            </a>
+
         @endif
+        {{-- ========================================= --}}
+
         <div class="nav-divider"></div>
 
-        <!-- Profil (TOUS) -->
+        <!-- PROFIL (TOUS) -->
         <a href="{{ route('profile.edit') }}"
            class="nav-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
             <i class="fas fa-user"></i>
