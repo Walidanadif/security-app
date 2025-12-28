@@ -7,22 +7,24 @@ use App\Models\Site;
 use App\Models\Planning;
 use App\Models\Presence;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // ================= ADMIN =================
-        if (auth()->user()->role === 'admin') {
+        $user = auth()->user();
+        $today = Carbon::today();
 
-            $today = today();
+        /* ================= ADMIN ================= */
+        if ($user->role === 'admin') {
 
-            // Stats principales
+            // Statistiques globales
             $agentsCount = Agent::count();
             $sitesCount = Site::count();
             $planningsCount = Planning::count();
 
-            // Présences aujourd'hui
+            // Présences aujourd’hui
             $todayPresences = Presence::whereDate('date', $today)
                 ->where('statut', 'present')
                 ->count();
@@ -31,15 +33,18 @@ class DashboardController extends Controller
                 ->where('statut', 'absent')
                 ->count();
 
-            // Graphique
+            // Données graphique
             $present = Presence::whereDate('date', $today)
-                ->where('statut', 'present')->count();
+                ->where('statut', 'present')
+                ->count();
 
             $retard = Presence::whereDate('date', $today)
-                ->where('statut', 'retard')->count();
+                ->where('statut', 'retard')
+                ->count();
 
             $absent = Presence::whereDate('date', $today)
-                ->where('statut', 'absent')->count();
+                ->where('statut', 'absent')
+                ->count();
 
             // Dernières présences
             $lastPresences = Presence::latest()->take(5)->get();
@@ -57,11 +62,57 @@ class DashboardController extends Controller
             ));
         }
 
-        // ================= AGENT =================
-        return view('dashboard.agent');
+        /* ================= AGENT ================= */
+
+        // Récupérer l’agent lié à l’utilisateur
+        $agent = $user->agent;
+
+        // Statut du jour
+        $todayPresence = Presence::where('agent_id', $agent->id)
+            ->whereDate('date', $today)
+            ->first();
+
+        // Stats personnelles (mois courant)
+        $month = Carbon::now()->month;
+
+        $presentCount = Presence::where('agent_id', $agent->id)
+            ->whereMonth('date', $month)
+            ->where('statut', 'present')
+            ->count();
+
+        $absentCount = Presence::where('agent_id', $agent->id)
+            ->whereMonth('date', $month)
+            ->where('statut', 'absent')
+            ->count();
+
+        $retardCount = Presence::where('agent_id', $agent->id)
+            ->whereMonth('date', $month)
+            ->where('statut', 'retard')
+            ->count();
+
+        // Prochain planning
+        $nextPlanning = Planning::where('agent_id', $agent->id)
+            ->whereDate('date', '>=', $today)
+            ->orderBy('date')
+            ->first();
+
+        // Historique récent
+        $lastPresences = Presence::where('agent_id', $agent->id)
+            ->orderBy('date', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('dashboard.agent', compact(
+            'todayPresence',
+            'presentCount',
+            'absentCount',
+            'retardCount',
+            'nextPlanning',
+            'lastPresences'
+        ));
     }
 
-    // ================= HISTORIQUE AGENT =================
+    /* ================= HISTORIQUE AGENT ================= */
     public function historiqueAgent()
     {
         $user = auth()->user();
