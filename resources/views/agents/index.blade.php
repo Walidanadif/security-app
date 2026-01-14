@@ -27,6 +27,30 @@
             </div>
         </div>
     </div>
+<form method="GET" action="{{ route('agents.index') }}" class="mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Rechercher par nom complet..."
+                value="{{ request('search') }}"
+            >
+        </div>
+
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-search me-1"></i> 
+            </button>
+
+            <a href="{{ route('agents.index') }}" class="btn btn-secondary w-100">
+                <i class="fas fa-times me-1"></i> 
+            </a>
+        </div>
+    </div>
+</form>
+
 
     <!-- Table -->
     <div class="row">
@@ -49,7 +73,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th class="px-4 py-3 text-uppercase text-muted" style="font-size: .75rem;">
-                                            <i class="fas fa-user me-2"></i>Nom
+                                            <i class="fas fa-user me-2"></i>Nom Complet
                                         </th>
 
                                         <th class="px-4 py-3 text-uppercase text-muted" style="font-size: .75rem;">

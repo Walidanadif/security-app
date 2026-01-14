@@ -7,13 +7,32 @@ use App\Models\Site;
 
 class PlanningController extends Controller
 {
-    public function index()
-    {
-        $plannings = Planning::with(['agent', 'site'])
+public function index(Request $request)
+{
+    $plannings = Planning::with(['agent', 'site'])
+
+        ->when($request->search, function ($query) use ($request) {
+            $query->where(function ($q) use ($request) {
+                $q->whereHas('agent', function ($a) use ($request) {
+                    $a->where('nom', 'LIKE', '%' . $request->search . '%');
+                })
+                ->orWhereHas('site', function ($s) use ($request) {
+                    $s->where('nom', 'LIKE', '%' . $request->search . '%');
+                });
+            });
+        })
+
+        ->when($request->date, function ($query) use ($request) {
+            $query->whereDate('date', $request->date);
+        })
+
         ->orderBy('date', 'desc')
-        ->paginate(5);
-        return view('plannings.index', compact('plannings'));
-    }
+
+        ->paginate(5)
+        ->withQueryString();
+
+    return view('plannings.index', compact('plannings'));
+}
 
     public function create()
     {

@@ -7,11 +7,17 @@ use App\Models\Site;
 class SiteController extends controller
 {
 
-    public function index()
-    {
-        $sites = Site::paginate(5);
-        return view('sites.index', compact('sites'));
-    }
+ public function index(Request $request)
+{
+    $sites = Site::query()
+        ->when($request->search, function ($query) use ($request) {
+            $query->where('nom', 'LIKE', '%' . $request->search . '%');
+        })
+        ->paginate(5)
+        ->withQueryString();
+
+    return view('sites.index', compact('sites'));
+}
 
     public function create()
     {

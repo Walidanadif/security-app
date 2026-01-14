@@ -8,18 +8,19 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 class AgentController extends Controller
 {
-    public function index()
-    {
-         $agents = Agent::with('user')
-         ->paginate(5);
+public function index(Request $request)
+{
+    $agents = Agent::query()
+
+        ->when($request->search, function ($query) use ($request) {
+            $query->where('nom', 'LIKE', '%' . $request->search . '%');
+        })
+
+        ->paginate(5)
+        ->withQueryString();
+
     return view('agents.index', compact('agents'));
-    }
-
-    public function create()
-    {
-        return view('agents.create');
-    }
-
+}
 public function store(Request $request)
 {
     $request->validate([

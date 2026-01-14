@@ -139,11 +139,34 @@ public function store(Request $request)
 
 //admin
 
-public function adminIndex()
+public function adminIndex(Request $request)
 {
-    $presences = Presence::with('agent.plannings.site')
+    $presences = Presence::with([
+            'agent',
+            'agent.plannings.site'
+        ])
+
+        ->when($request->search, function ($query) use ($request) {
+            $query->where(function ($q) use ($request) {
+
+                $q->whereHas('agent', function ($a) use ($request) {
+                    $a->where('nom', 'LIKE', '%' . $request->search . '%');
+                })
+
+                ->orWhereHas('agent.plannings.site', function ($s) use ($request) {
+                    $s->where('nom', 'LIKE', '%' . $request->search . '%');
+                });
+            });
+        })
+
+        ->when($request->date, function ($query) use ($request) {
+            $query->whereDate('date', $request->date);
+        })
+
         ->orderBy('date', 'desc')
-        ->paginate(5);
+
+        ->paginate(5)
+        ->withQueryString();
 
     return view('agents.presence.admin.index', compact('presences'));
 }
