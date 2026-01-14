@@ -28,76 +28,107 @@
                         <div class="alert alert-success alert-dismissible fade show">
                             <i class="fas fa-check-circle me-2"></i>
                             {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <button type="button" class="btn-close"  data-bs-dismiss="alert"></button>
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('profile.update') }}">
+                    <div id="passwordError" class="alert alert-danger d-none">
+                        Les mots de passe ne correspondent pas !
+                    </div>
+
+                    <form id="profileForm">
                         @csrf
                         @method('PATCH')
 
                         <!-- Nom -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-user me-2"></i>Nom complet
-                            </label>
-                            <input type="text" name="name"
-                                   value="{{ auth()->user()->name }}"
-                                   class="form-control"
-                                   readonly>
+                            <label class="form-label fw-semibold"><i class="fas fa-user me-2"></i>Nom complet</label>
+                            <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control" readonly>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-envelope me-2"></i>Email
-                            </label>
-                            <input type="email"
-                                   value="{{ auth()->user()->email }}"
-                                   class="form-control"
-                                   readonly>
+                            <label class="form-label fw-semibold"><i class="fas fa-envelope me-2"></i>Email</label>
+                            <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control" readonly>
                         </div>
 
                         <hr>
 
                         <!-- Nouveau mot de passe -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-lock me-2"></i>Nouveau mot de passe
-                            </label>
-                            <input type="password"
-                                   name="password"
-                                   class="form-control"
-                                   placeholder="Laisser vide pour ne pas changer">
+                            <label class="form-label fw-semibold"><i class="fas fa-lock me-2"></i>Nouveau mot de passe</label>
+                            <input type="password" name="password" class="form-control" placeholder="Laisser vide pour ne pas changer">
                         </div>
 
                         <!-- Confirmation -->
                         <div class="mb-4">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-lock me-2"></i>Confirmer mot de passe
-                            </label>
-                            <input type="password"
-                                   name="password_confirmation"
-                                   class="form-control">
+                            <label class="form-label fw-semibold"><i class="fas fa-lock me-2"></i>Confirmer mot de passe</label>
+                            <input type="password" name="password_confirmation" class="form-control">
                         </div>
 
                         <!-- Actions -->
                         <div class="d-flex justify-content-end gap-2">
-                            <button type="reset" class="btn btn-outline-secondary">
-                                <i class="fas fa-times me-1"></i>
-                            </button>
-
-                            <button type="submit"  id="submitBtn" class="btn btn-primary" >
-                                <i class="fas fa-save me-1"></i>
-                            </button>
+                            <button type="reset" class="btn btn-outline-secondary"><i class="fas fa-times me-1"></i></button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i></button>
                         </div>
-
                     </form>
+
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('profileForm');
+  const password = form.querySelector('input[name="password"]');
+  const confirm  = form.querySelector('input[name="password_confirmation"]');
+  const errorDiv = document.getElementById('passwordError');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if ((password.value || confirm.value) && password.value !== confirm.value) {
+      errorDiv.classList.remove('d-none');
+      return;
+    }
+    errorDiv.classList.add('d-none');
+
+    const formData = new FormData(form); // récupère name/email/password/etc automatiquement
+
+    try {
+      const res = await fetch("{{ route('profile.update') }}", {
+        method: "POST",
+        headers: {
+          "X-CSRF-TOKEN": form.querySelector('input[name="_token"]').value,
+          "Accept": "application/json",
+        },
+        body: formData
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        console.error(data);
+        alert("Erreur de validation (voir console).");
+        return;
+      }
+
+      alert("Profil mis à jour !");
+      // Optionnel: recharger pour afficher le message session success
+      // window.location.reload();
+    } catch (err) {
+      console.error(err);
+      alert("Erreur réseau.");
+    }
+  });
+});
+</script>
+
+@endsection
 
 @endsection
