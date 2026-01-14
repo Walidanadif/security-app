@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     errorDiv.classList.add('d-none');
 
-    const formData = new FormData(form); // récupère name/email/password/etc automatiquement
+    const formData = new FormData(form); 
 
     try {
       const res = await fetch("{{ route('profile.update') }}", {
@@ -119,8 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       alert("Profil mis à jour !");
-      // Optionnel: recharger pour afficher le message session success
-      // window.location.reload();
+     
     } catch (err) {
       console.error(err);
       alert("Erreur réseau.");
