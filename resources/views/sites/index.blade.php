@@ -23,6 +23,29 @@
             </div>
         </div>
     </div>
+<form method="GET" action="{{ route('sites.index') }}" class="mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Rechercher par nom du site..."
+                value="{{ request('search') }}"
+            >
+        </div>
+
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-search me-1"></i> 
+            </button>
+
+            <a href="{{ route('sites.index') }}" class="btn btn-secondary w-100">
+                <i class="fas fa-times me-1"></i> 
+            </a>
+        </div>
+    </div>
+</form>
 
     <div class="row">
         <div class="col-12">

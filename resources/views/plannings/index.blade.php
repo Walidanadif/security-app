@@ -23,6 +23,42 @@
             </div>
         </div>
     </div>
+<form method="GET" action="{{ route('plannings.index') }}" class="mb-4">
+    <div class="row justify-content-center align-items-end g-2">
+
+        <div class="col-md-3">
+            <label class="form-label small text-muted">Agent ou Site</label>
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Nom agent ou site"
+                value="{{ request('search') }}"
+            >
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label small text-muted">Date</label>
+            <input
+                type="date"
+                name="date"
+                class="form-control"
+                value="{{ request('date') }}"
+            >
+        </div>
+
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-search me-1"></i> 
+            </button>
+
+            <a href="{{ route('plannings.index') }}" class="btn btn-secondary w-100">
+                <i class="fas fa-times me-1"></i> 
+            </a>
+        </div>
+
+    </div>
+</form>
 
     <div class="row">
         <div class="col-12">
