@@ -21,6 +21,11 @@ public function index(Request $request)
 
     return view('agents.index', compact('agents'));
 }
+public function create()
+{
+    return view('agents.create'); 
+}
+
 public function store(Request $request)
 {
     $request->validate([

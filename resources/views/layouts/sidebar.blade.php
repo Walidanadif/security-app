@@ -8,7 +8,7 @@
     <div class="sidebar-header">
         <div class="logo">
             <div class="logo-icon">
-                <i class="fas fa-shield-halved"></i>
+<img src="{{ asset('images/agent.png') }}" alt="Logo" width="150">
             </div>
             <div class="logo-text">
                 <h1>SecureGuard</h1>
